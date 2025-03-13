@@ -1,0 +1,592 @@
+<section  class="popular-categories" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="category-container">
+    <h1 class="main-heading animate--slide-in">
+      {{ section.settings.main-heading }}
+    </h1>
+    <div class="categories-wrapper">
+    <div class="categories-grid">
+      {% for i in (1..14) %}
+        {% assign image_key = 'image' | append: i | append: '_url' %}
+        {% assign image_url = section.settings[image_key] %}
+        
+        {% assign category_url_key = 'category_' | append: i | append: '_url' %}
+        {% assign category_url = section.settings[category_url_key] %}
+
+        {% assign category_title_key = 'category_' | append: i | append: '_title' %}
+        {% assign category_title = section.settings[category_title_key] %}
+
+        {% if category_url %}
+          <a href="{{ category_url }}" class="category {% if i > 6 %}hidden-category{% endif %}">
+            <div class="category-image">
+              <img src="{{ image_url | default: 'https://via.placeholder.com/150' }}" alt="{{ category_title }}">
+            </div>
+            <div class="category-title" style="text-align: center;">
+              {{ category_title }}
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+      <div class ="show-more">
+      <button class="toggle-btn">Show More</button>
+      </div>
+  </div>
+  </div>
+</section>
+
+
+<style>
+/* =======================
+   Base Styles
+======================= */
+.popular-categories .category-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding doesn't affect total width */
+  max-width: 100%; /* Prevents overflow on extreme zoom-out */
+  
+}
+
+.categories-wrapper {
+  background-color: white;
+  height: auto;
+  padding: 30px 55px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 11px;
+}
+
+.popular-categories .main-heading {
+  position: relative;
+  margin: 25px 0;
+  font-size: 40px;
+  font-weight: 400;
+  font-family: 'Assistant', sans-serif;
+}
+
+.popular-categories .categories-grid {
+  display: grid;
+  gap: 25px;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.popular-categories .category {
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+}
+
+.popular-categories .category-image img {
+  width: 100%;
+  max-width: 160px;
+  border-radius: 50%;
+  background-color: #02969b;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.popular-categories .category-title {
+  margin-top: 10px;
+  font-family: 'Assistant', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.popular-categories .category:hover {
+  cursor: pointer;
+  transform: translateY(-4px);
+  transition: transform 0.3s ease;
+}
+
+.toggle-btn {
+  display: none;
+}
+
+/* =======================
+   Responsive Styles
+======================= */
+
+/* Small Screens (Mobile) - Up to 767px */
+@media (max-width: 767px) {
+  .popular-categories .category-container {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .popular-categories .categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px
+  }
+
+  .popular-categories .main-heading {
+    margin: 20px 5px;
+    font-size: 30px;
+  }
+
+  .categories-wrapper {
+    padding: 25px;
+  }
+
+  .hidden-category {
+    display: none;
+  }
+
+  .show-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .toggle-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-family: 'Assistant', sans-serif;
+    color: #333;
+    background-color: #fff;
+    border: 0.8px solid #282c2c;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 60%;
+  }
+}
+/* Medium Screens laptops - 1025px to 1345px */
+@media (min-width: 1025px) and (max-width: 1345px) {
+  .popular-categories .category-container {
+    max-width: 93.2%;
+  }
+
+  .popular-categories .categories-grid {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 17px;
+    overflow: hidden;
+  }
+  .popular-categories .category-image img {
+  width: 95%;
+    max-width: 160px
+  }
+}
+
+/* Small Screens (Tablets) - 768px to 820px */
+@media (min-width: 768px) and (max-width: 820px) {
+  .popular-categories .category-container {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .popular-categories .categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px
+  }
+
+  .popular-categories .main-heading {
+    margin: 20px 5px;
+    font-size: 30px;
+  }
+
+  .categories-wrapper {
+    padding: 25px;
+  }
+
+  .hidden-category {
+    display: none;
+  }
+
+  .show-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .toggle-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-family: 'Assistant', sans-serif;
+    color: #333;
+    background-color: #fff;
+    border: 0.8px solid #282c2c;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 60%;
+  }
+}
+  
+/* Medium Screens (Tablets) - 821px to 1024px */
+@media (min-width: 821px) and (max-width: 1024px) {
+  .popular-categories .category-container {
+    max-width: 93.2%;
+  }
+
+  .popular-categories .categories-grid {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 17px;
+    overflow: hidden;
+  }
+  .popular-categories .category-image img {
+  width: 100%;
+  }
+}
+@media (min-width: 912px) {
+  .popular-categories .category-container {
+    max-width: 93.4%;
+    
+  }
+}
+/* Large Screens (Desktops) - 1346px and Up */
+@media (min-width: 1346px) {
+  .popular-categories .categories-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .popular-categories .category-title {
+    font-size: 16px;
+  }
+}
+
+/* MacBooks & Large Screens - 1440px and Up */
+@media (min-width: 1440px) {
+  .popular-categories .category-container {
+    max-width: 1560px;
+    padding: 0 40px;
+  }
+}
+
+/* Ultra-Wide Screens - 1920px and Up */
+@media (min-width: 1920px) {
+  .popular-categories .category-container {
+    max-width: 1610px;  /* Adjusted for ultra-wide */
+    padding: 0 60px;
+  }
+}
+
+/* Super Ultra-Wide (for extreme zoom-out cases) - 2560px and Up */
+@media (min-width: 2560px) {
+  .popular-categories .category-container {
+    max-width: 1650px;
+    padding: 0 80px;
+  }
+}
+
+/* Extreme Wide Screens (4K displays or extreme zoom out) */
+@media (min-width: 3840px) {
+  .popular-categories .category-container {
+    max-width: 1700px;
+    padding: 0 100px;
+  }
+}
+
+  @media (min-width: 1024px) and (max-width: 1365px) {
+  .popular-categories .category-container {
+    max-width: 93.2%;  /* Slightly smaller width for small laptops */
+    padding: 0 20px;    /* Adjusted padding */
+    margin: 0 auto;     /* Center alignment */
+    box-sizing: border-box;
+  }
+</style>
+
+
+{% schema %}
+{
+  "name": "Popular Categories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "main-heading",
+      "label": "Section Heading",
+      "default": "Popular Categories"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "default": 50,
+      "min": 0,
+      "max": 200,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "default": 50,
+      "min": 0,
+      "max": 200,
+      "step": 5
+    },
+    {
+  "type": "url",
+  "id": "image1_url",
+  "label": "Image 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "category_1_title",
+      "label": "Category 1 Title",
+      "default": "Smartphones"
+    },
+    {
+      "type": "url",
+      "id": "category_1_url",
+      "label": "Category 1 Link"
+    },
+      {
+  "type": "url",
+  "id": "image2_url",
+  "label": "Image 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "category_2_title",
+      "label": "Category 2 Title",
+      "default": "Laptops"
+    },
+    {
+      "type": "url",
+      "id": "category_2_url",
+      "label": "Category 2 Link"
+    },
+    {
+      "type": "url",
+  "id": "image3_url",
+  "label": "Image 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "category_3_title",
+      "label": "Category 3 Title",
+      "default": "Smartphones"
+    },
+    {
+      "type": "url",
+      "id": "category_3_url",
+      "label": "Category 3 Link"
+    },
+    {
+      "type": "url",
+  "id": "image4_url",
+  "label": "Image 4 URL"
+    },
+    {
+      "type": "text",
+      "id": "category_4_title",
+      "label": "Category 4 Title",
+      "default": "Smartphones"
+    },
+    {
+      "type": "url",
+      "id": "category_4_url",
+      "label": "Category 4 Link"
+    },
+    {
+      "type": "url",
+  "id": "image5_url",
+  "label": "Image 5 URL"
+    },
+    {
+      "type": "text",
+      "id": "category_5_title",
+      "label": "Category 5 Title",
+      "default": "Smartphones"
+    },
+    {
+      "type": "url",
+      "id": "category_5_url",
+      "label": "Category 5 Link"
+    },
+    {
+      "type": "url",
+  "id": "image6_url",
+  "label": "Image 6 URL"
+    },
+    {
+      "type": "text",
+      "id": "category_6_title",
+      "label": "Category 6 Title",
+      "default": "Smartphones"
+    },
+    {
+      "type": "url",
+      "id": "category_6_url",
+      "label": "Category 6 Link"
+    },
+    {
+      "type": "url",
+  "id": "image7_url",
+  "label": "Image 7 URL"
+    },
+    {
+      "type": "text",
+      "id": "category_7_title",
+      "label": "Category 7 Title",
+      "default": "Smartphones"
+    },
+    {
+      "type": "url",
+      "id": "category_7_url",
+      "label": "Category 7 Link"
+    },
+    {
+      "type": "url",
+  "id": "image8_url",
+  "label": "Image 8 URL"
+    },
+    {
+      "type": "text",
+      "id": "category_8_title",
+      "label": "Category 8 Title",
+      "default": "Smartphones"
+    },
+    {
+      "type": "url",
+      "id": "category_8_url",
+      "label": "Category 8 Link"
+    },
+    {
+      "type": "url",
+  "id": "image9_url",
+  "label": "Image 9 URL"
+    },
+    {
+      "type": "text",
+      "id": "category_9_title",
+      "label": "Category 9 Title",
+      "default": "Smartphones"
+    },
+    {
+      "type": "url",
+      "id": "category_9_url",
+      "label": "Category 9 Link"
+    },
+    {
+      "type": "url",
+  "id": "image10_url",
+  "label": "Image 10 URL"
+    },
+    {
+      "type": "text",
+      "id": "category_10_title",
+      "label": "Category 10 Title",
+      "default": "Smartphones"
+    },
+    {
+      "type": "url",
+      "id": "category_10_url",
+      "label": "Category 10 Link"
+    },
+    {
+      "type": "url",
+  "id": "image11_url",
+  "label": "Image 11 URL"
+    },
+    {
+      "type": "text",
+      "id": "category_11_title",
+      "label": "Category 11 Title",
+      "default": "Smartphones"
+    },
+    {
+      "type": "url",
+      "id": "category_11_url",
+      "label": "Category 11 Link"
+    },
+    {
+      "type": "url",
+  "id": "image12_url",
+  "label": "Image 12 URL"
+    },
+    {
+      "type": "text",
+      "id": "category_12_title",
+      "label": "Category 12 Title",
+      "default": "Smartphones"
+    },
+    {
+      "type": "url",
+      "id": "category_12_url",
+      "label": "Category 12 Link"
+    },
+    {
+      "type": "url",
+  "id": "image13_url",
+  "label": "Image 13 URL"
+    },
+    {
+      "type": "text",
+      "id": "category_13_title",
+      "label": "Category 13 Title",
+      "default": "Smartphones"
+    },
+    {
+      "type": "url",
+      "id": "category_13_url",
+      "label": "Category 13 Link"
+    },
+    {
+      "type": "url",
+  "id": "image14_url",
+  "label": "Image 14 URL"
+    },
+    {
+      "type": "text",
+      "id": "category_14_title",
+      "label": "Category 14 Title",
+      "default": "Smartphones"
+    },
+    {
+      "type": "url",
+      "id": "category_14_url",
+      "label": "Category 14 Link"
+    },
+    {
+      "type": "select",
+      "id": "category_title_alignment",
+      "label": "Category Title Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+  ],
+  "presets": [
+    {
+      "name": "Popular Categories",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const toggleBtn = document.querySelector(".toggle-btn");
+  const hiddenCategories = document.querySelectorAll(".hidden-category");
+  let isExpanded = false;
+
+  toggleBtn.addEventListener("click", function() {
+    hiddenCategories.forEach(category => {
+      category.style.display = isExpanded ? "none" : "block";
+    });
+    
+    toggleBtn.textContent = isExpanded ? "Show More" : "Show Less";
+    isExpanded = !isExpanded;
+  });
+});
+</script>
